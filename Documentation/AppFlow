@@ -1,0 +1,39 @@
+APP FLOW:
+
+ #1. Login Screen:
+
+The initial screen is a login screen where the user can sign in.
+
+If the user does not have an account, a button at the bottom of the screen provides a form to fill out to register.
+
+#2. Registration Screen.
+
+The user must fill out all the fields, excluding profile image, to sign up.
+
+If the user accidentally goes to the sign up screen, there is a button at the top right to return to the login screen.
+
+#3 Profile Screen
+
+Upon logging in, the user is presented with their profile. The profile contains their username on the navigation bar, the profile photo directly below, followed by the recipe count.
+
+Below the profile information is the images of the recipes. The user can choose between a grid layout and a list layout. Upon tapping a cell, the user is presented with the recipe.
+
+# 4 View Recipe Screen
+
+Here is where the user can view their recipe. They can read what they wrote, they can delete it, or press the back button to return to the profile screen.
+
+#5 Select Photo Screen
+
+The screen allows the user to select a photo from their photo library or from an online search if the user does not have a picture of the recipe.
+
+#5.1 Library Photo
+
+When the user taps on an image, it will show up on the header in a larger size. Press next to go to the create recipe screen.
+
+#5.2 Online Search
+
+The user can type in a string of text and press the search button to find pictures matching the string. The user can then tap one of the photos to bring up the create recipe screen.
+
+#6 Create recipe screen
+
+This is where the user can then add text for their recipe. They then can either cancel or they can then proceed to save the recipe. Swipe down on the textfield to dismiss the keyboard.

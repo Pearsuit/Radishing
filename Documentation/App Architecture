@@ -1,0 +1,78 @@
+APP ARCHITECTURE:
+
+This is just a note on how to navigate the code of the app
+
+The app has three main folders: Scenes, Services, and Core
+
+The SCENES folder contains what are known as scenes. A scene, in simple words, is a folder itself that contains modularized files that normally make up a regular viewcontroller. The components are ViewController, Allocator, Producer, Presenter, Coordinator, and Alert Handler. More on this later, but for now view a Scene as one screen.
+
+The SERVICES folder contains the services of the app such as database, authentication, offline storage, local storage, and photo retrieval. This is the code that works with things outside of the UIKIt. The folders inside include both the folder for the basic implementation protocols and the service providers that conform to the protocols. By conforming to protocols, the coder can easily switch out a service for another service that conforms to the same protocol without having to refactor the whole app.
+
+The CORE folder is generally filed with code that the scenes need to have to be implemented such as protocols or container controllers like the main tab bar controller. The folder also houses UIKIT extensions, as well as custom types.
+
+
+SCENE ANATOMY:
+
+
+Note:
+
+The architecture used is an enum-oriented variant of Clean Architecture that uses a unidirectional ViewController - Allocator - Producer - Presenter flow. This type of architecture attempts to greatly reduce what one component can do by attempting to adhere to the Single Responsiblity Principle. Using a unidirectional flow is important because is prohibits one component from cannibalizing the other components since none of the 4 main components are a middle man, a problem found in MVC, MVVM, MVP, and VIPER since each has a middle component that can recieve and send information to two different components, allowing the middle component to become bloated.
+
+This architecture also allows jobs to be divided into specialties since the view, business logic, services, and model have very limited or no knowledge of the others. This is thanks to protocols and the exporting object and the importing object that each component has. A person that specializes in the view can work in the viewcontroller never having to see a line of business logic thanks to its exporting object (the request object) and its importing object (the view model) limiting its interaction to matters it can help with. More detail on each component is provided below:
+
+1. The View(Controller):
+
+The viewcontroller has a limited amount of responsibility. It knows how to manipulate the view, when to navigate(but not how) to another one, how to create a request object from a user action, and how to fetch a view model object and display the information in it. It has absolutely no knowledge about business logic, services, nor errors. It also does not understand how to check if things like textfields contains nil or if the character count is too short. That logic is handled by the producer. The viewcontroller simply puts whatever is in a given view into a request object, regardless of its value.
+
+SHORT: All beauty, no brains. The ViewController is pretty much only responsible for controlling the view. Any logic, outside of counting in an array for collectionViews or tableviews, is given to the producer. It simply packages whatever a view contains and sends it in a request, regardless of value, and then unpackages primitive types that it can display.
+
+1.1 Request object
+
+The request object contains two properties: an "assignment" enum case and a dictionary of required information. Hence, when the view controller creates one, it does not know what the request is truly for. It sends the request object to the allocator.
+
+2. The Allocator:
+
+The allocator essential functions as a switchboard. It figures out what "assignment" goes to what producer. Nothing more, nothing else. It then creates and sends a work object. This could be created as a reusable component used by all scenes, but by making one for each scene, the reader will know precisely what the producers are for a scene and what ones are not. It also provents code from going to a producer that it is not meant to go to. You sacrifice a little bit of repetative code for more readability and restricting access.
+
+SHORT: The delivory boy. The allocator hands off work to the appropriate producer, not knowing what is inside or what it means.
+
+2.1 Work Object
+
+The work object is pretty much nothing more than a request object with a new property for that stores a presenter. The producer will need that presenter since the producer is the only component that does not get initialized upon scene flow creation.
+
+3 Producer
+
+A scene can have 0 to many producers. Each producer can only communicate with one type of service. A database producer can only communicate with a database service, et cetera. A producer is responsible for producing a response from its communication with the service. The response is then stored is a results object and sent to the presenter. The producer does not manipulate the information provided in the response tuple. It simple packages whatever it is given. Like the allocator, you could potentailly create a reusable producer, but no scenes generally ask for a producer to do similar tasks. For example, only one scene will generally ask to login, another to register, et cetera. So it is better to have seperate producers since the tasks are generally unique to one scene.
+
+SHORT: The producer is responsible for producing a response from a service.
+
+3.1 Results Object
+
+The results object contains three properties: The assignment given, an optional error, annd an optional info dictionary. 
+
+
+4 Presenter
+
+The presenter is the component responsible for taking the information from the results object and manipulating it into the proper information that the viewcontroller can read if any manipulation is required. The new data is then stored in a View Model object and sent to the view controller.
+
+SHORT: Manipulates data into something the view controller can understand.
+
+4.1 View Model
+
+The view model, at the moment, is nothing more than an info dictionary. The only type of data inside it is primitives, UIImages, or custom types that only contain primitive types because the viewcontroller should only know about primitives and UIImages. It should not know about things like errors.
+
+5. Coordinator
+
+The coordinator is responsibly for the how when it comes to transitioning. It tells the view controller what type of transitioning it needs and what information is needed during the transition.
+
+SHORT:  Responsible for how to transition and with what data.
+
+6. Alert Handler
+
+This component is responsibly for taking any error or bool that it recieved by the presenter and transforming it into an AlertDisplay object that the viewcontroller can display to the user. 
+
+SHORT: Responsible for transforming an error into something that the view controller can understand.
+
+6.1 AlertDisplay
+
+The object contains two properties, AlertTitle and AlertMessage, both of which are typealiases for String, that go into the title and message of an alert view, respectively.

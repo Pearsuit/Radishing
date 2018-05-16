@@ -1,0 +1,7 @@
+Flickr API Key:
+
+The app currently does not have an APIKeys enum. Please create the file and the enum, and add a case called flickr. Get an API key from Flickr and give the flickr case the raw value of the API key. The APIKeys enum file should preferably be placed in the Radishing/Core/Types/Enums folder.
+
+Firebase:
+
+Please go the the Firebase website, create a new project, follow the setup, and add your own GoogleService-Info.plist to the app. After adding the .plist, make sure you setup the FIRESTORE database (NOT the old, realtime database), as well as grant authenticated users permission to change data in the security rules. 
