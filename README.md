@@ -20,26 +20,26 @@ Please read the RequiredSetup text file in the Documentation folder to properly 
 **Future Plans**
 
 Current Improvements:
-Create an Edit Recipe Scene
-Create an Edit Profile Scene
-Add "Delete User" Functionality
-Customize Image Picker Controller
-Verify and Reset Email Login
+- Create an Edit Recipe Scene
+- Create an Edit Profile Scene
+- Add "Delete User" Functionality
+- Customize Image Picker Controller
+- Verify and Reset Email Login
 
 Version 0.2:
-Create Social Aspect
-Add iMessage Extension
-Improve Concurrancy
-Add Unit Testing
-Add Facebook and Phone Authentication
-Check for unique username
+- Create Social Aspect
+- Add iMessage Extension
+- Improve Concurrancy
+- Add Unit Testing
+- Add Facebook and Phone Authentication
+- Check for unique username
 
 Version 0.3:
-Add Core Animation
-Add UIKit Dynamics
-Upgrade UI Design
+- Add Core Animation
+- Add UIKit Dynamics
+- Upgrade UI Design
 
 Version 0.4:
-Add Audio and Video Streaming
-Add Ability to Buy and Sell Recipes
-Add optional Nutrition Facts Scen
+- Add Audio and Video Streaming
+- Add Ability to Buy and Sell Recipes
+- Add optional Nutrition Facts Scen
