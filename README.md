@@ -32,7 +32,7 @@ Version 0.2:
 - Improve Concurrancy
 - Add Unit Testing
 - Add Facebook and Phone Authentication
-- Check for unique username
+- Unique Username Verification
 
 Version 0.3:
 - Add Core Animation
@@ -42,4 +42,4 @@ Version 0.3:
 Version 0.4:
 - Add Audio and Video Streaming
 - Add Ability to Buy and Sell Recipes
-- Add optional Nutrition Facts Scen
+- Add Optional Nutrition Facts Scene
