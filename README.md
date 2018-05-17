@@ -25,12 +25,13 @@ Current Improvements:
 - Add "Delete User" Functionality
 - Customize Image Picker Controller
 - Verify and Reset Email Login
+- Improve Concurrancy
 
 Version 0.2:
 - Create Social Aspect
 - Add iMessage Extension
-- Improve Concurrancy
 - Add Unit Testing
+- Start Using Instruments
 - Add Facebook and Phone Authentication
 - Unique Username Verification
 
